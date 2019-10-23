@@ -1,11 +1,15 @@
 const Koa = require('koa');
 const app = new Koa();
 var Router = require('koa-router')();
-var index = require('./src/router/index')
-Router.get('/index', index)
+
+var admin = require('./src/router/admin')
+
+Router.use('/admin', admin)
+
 app
   .use(Router.routes())
   .use(Router.allowedMethods());
+
 app.listen(8800,err=>{
     if(err){
         console.log(err)
