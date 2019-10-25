@@ -1,8 +1,12 @@
 const Koa = require('koa');
 const Router = require('koa-router')();
-const index = new Koa()
-Router.get('/',async(ctx)=>{
-    ctx.body="这是前台首页";
+const news = require('./admin/news');
+const { query } = require('../db/index')
+Router.get('/',async (ctx)=>{
+    
+    var catelist = await query('SELECT * FROM my_class');
+    ctx.body=catelist;
 })
+Router.use('/news',news)
 
 module.exports = Router.routes();
